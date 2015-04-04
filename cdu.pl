@@ -165,37 +165,37 @@ if ($normal) {
     if ($max_depth) {
         $h = "$h --max-depth=$max_depth"
     }
-    $cmde="du $h -- $args";
+    $cmde="gdu $h -- $args";
 } elsif ($file) {
     my $find_max_depth="";
     if ($max_depth) {
         $find_max_depth = "-maxdepth $max_depth";
     }
-    $cmde="find $args $find_max_depth -type f -print0 | xargs -0 du -s $h";
+    $cmde="find $args $find_max_depth -type f -print0 | xargs -0 gdu -s $h";
 } elsif ($recursiveS) {
     if ($max_depth) {
         $h = "$h --max-depth=$max_depth"
     }
-    $cmde="du -S $h -- $args";
+    $cmde="gdu -S $h -- $args";
 } elsif ($recursive) {
     if ($max_depth) {
         $h = "$h --max-depth=$max_depth"
     }
     if (@ARGV == 0 || $oneDir) {
-	$cmde="du $h -- $args ; du -sS $args ";
+	$cmde="gdu $h -- $args ; du -sS $args ";
     } else {
-	$cmde="du $h -- $args ";
+	$cmde="gdu $h -- $args ";
     }
 } elsif ($oneDir || @ARGV == 0) {
     $cmde='for dir in */ .?*/; do
-    [ ! "$dir" = ../ -a -d "$dir" -a ! -L "${dir%/}" ] && du -s '.$h.' -- "$dir";
+    [ ! "$dir" = ../ -a -d "$dir" -a ! -L "${dir%/}" ] && gdu -s '.$h.' -- "$dir";
     done;
-    du -sS '.$h.' .';
+    gdu -sS '.$h.' .';
 } else {
-    $cmde="du -s $h -- $args";
+    $cmde="gdu -s $h -- $args";
 }
 
-# Read du output
+# Read gdu output
 my @nlist;
 my %kilosize;
 for (`$cmde`) {
