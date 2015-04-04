@@ -1,0 +1,6 @@
+  1. `cd' to the directory containing the package's source code and type
+     make
+
+  2. Type `make install' to install the program and documentation.
+     This will install the program in /usr/local.
+     Type `DESTDIR=/foobar make install' to install elsewhere.
